@@ -1,0 +1,18 @@
+@import '../../lib/globals/style/colors.css';
+
+.header-logo {
+  animation: header-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.header {
+  background-color: $reactBanner;
+  height: 150px;
+  padding: 20px;
+  color: $reactBannerText;
+}
+
+@keyframes header-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

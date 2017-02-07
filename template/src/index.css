@@ -1,5 +1,20 @@
+/*
+@import url('https://fonts.googleapis.com/css?family=Arsenal');
+@import url('https://fonts.googleapis.com/css?family=Catamaran');
+@import url('https://fonts.googleapis.com/css?family=Harmattan');
+@import url('https://fonts.googleapis.com/css?family=NTR');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+ */
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+  /*
+  font-family: 'Arsenal', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Catamaran', sans-serif;
+  font-family: 'NTR', sans-serif;
+  font-family: 'Harmattan', sans-serif;
+  */
 }
