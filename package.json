@@ -1,6 +1,6 @@
 {
   "name": "react-scripts-css-vars",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "description": "Configuration and scripts for Create React App.",
   "repository": "thtliife/react-scripts-css-vars",
   "license": "BSD-3-Clause",
@@ -51,6 +51,7 @@
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.2",
+    "inquirer": "^3.0.1",
     "jest": "18.1.0",
     "json-loader": "0.5.4",
     "object-assign": "4.1.0",
