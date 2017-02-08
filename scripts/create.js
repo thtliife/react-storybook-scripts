@@ -1,16 +1,11 @@
 const inquirer = require('inquirer')
 const fs = require('fs-extra')
 const path = require('path')
-// const paths = require('../config/paths')
-const paths = require('./node_modules/react-scripts-css-vars/config/paths') // switch this with above line when moved to node_modules
-const prompt = require('react-dev-utils/prompt')
-const spawnSync = require('cross-spawn').sync
+const paths = require('../config/paths')
 const chalk = require('chalk')
-const green = chalk.green
-const cyan = chalk.cyan
 
-const camelize = (str, capFirst) => str.replace(/[-_,.]/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (!capFirst && index == 0) ? letter.toLowerCase() : letter.toUpperCase()).replace(/\s+/g, '')
-const unCamelize = (str, capFirst) => str.replace(/[_,. ]/g, '-').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (capFirst && index == 0) ? letter.toUpperCase() : letter.toLowerCase()).replace(/\s+/g, '-')
+const camelize = (str, capFirst) => str.replace(/[-_,.]/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (!capFirst && index === 0) ? letter.toLowerCase() : letter.toUpperCase()).replace(/\s+/g, '')
+const unCamelize = (str, capFirst) => str.replace(/[_,. ]/g, '-').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (capFirst && index === 0) ? letter.toUpperCase() : letter.toLowerCase()).replace(/\s+/g, '-')
 
 const questions = [
   {
@@ -57,10 +52,6 @@ inquirer.prompt(questions).then((answers) => {
   const componentJSX = `${fileBaseName}-component.jsx`
   const componentCSS = `${fileBaseName}-style.css`
   const componentIndex = 'index.js'
-
-  const componentIndexPath = path.resolve(componentPath, 'index.js')
-  const componentJSXPath = path.resolve(componentPath, `${fileBaseName}-component.jsx`)
-  const componentCSSPath = path.resolve(componentPath, `${fileBaseName}-style.css`)
 
   const jsxTypes = {
     class: `import React, { Component } from 'react'
@@ -118,7 +109,7 @@ export { ${componentName} as default }
     fs.outputFile(path.resolve(filePath, fileName), content, (err) => {
       if (err) {
         console.error(chalk.red(`❌  Failed to write file: ${fileName}`))
-        console.error(chalk.red(`   ${e}`))
+        console.error(chalk.red(`   ${err}`))
         process.exit(2)
       }
       console.info(`✅  ${fileName}`)
