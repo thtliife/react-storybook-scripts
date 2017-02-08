@@ -71,7 +71,7 @@ class ${componentName} extends Component {
         <p>
           To get started, edit <code>src/components/${componentName}/${componentJSX}</code> and save to reload.
         </p>
-        {props.children}
+        {this.props.children}
       </div>
     )
   }
@@ -96,8 +96,7 @@ export default ${componentName}
 `
   }
 
-  const globalCssPath = answers.makeStory ? '../../src/lib/globals/style/globals.css' : '../../lib/globals/style/globals.css'
-  const outputCss = `@import '${globalCssPath}';
+  const outputCss = `@import '${path.relative(componentPath, paths.appCssGlobal)}';
 
 .${cssClass} {
   /* Put your css here... */
