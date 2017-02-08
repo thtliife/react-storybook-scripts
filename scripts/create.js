@@ -95,9 +95,9 @@ export default ${componentName}
   }
 
   const outputCss = `@import '../../lib/globals/style/colors.css';
-  
+
 .${cssClass} {
-  /* Put your css here... */;
+  /* Put your css here... */
 }
 `
 
