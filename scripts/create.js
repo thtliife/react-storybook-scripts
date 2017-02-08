@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const paths = require('../config/paths')
 const chalk = require('chalk')
+const editer = require('editer')
 
 const camelize = (str, capFirst) => str.replace(/[-_,.]/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (!capFirst && index === 0) ? letter.toLowerCase() : letter.toUpperCase()).replace(/\s+/g, '')
 const unCamelize = (str, capFirst) => str.replace(/[_,. ]/g, '-').replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => (capFirst && index === 0) ? letter.toUpperCase() : letter.toLowerCase()).replace(/\s+/g, '-')
@@ -51,6 +52,7 @@ inquirer.prompt(questions).then((answers) => {
 
   const componentJSX = `${fileBaseName}-component.jsx`
   const componentCSS = `${fileBaseName}-style.css`
+
   const componentIndex = 'index.js'
 
   const jsxTypes = {
@@ -94,7 +96,8 @@ export default ${componentName}
 `
   }
 
-  const outputCss = `@import '../../lib/globals/style/colors.css';
+  const globalCssPath = answers.makeStory ? '../../src/lib/globals/style/colors.css' : '../../lib/globals/style/colors.css'
+  const outputCss = `@import '${globalCssPath}';
 
 .${cssClass} {
   /* Put your css here... */
@@ -107,14 +110,52 @@ export { ${componentName} as default }
 
   const outputJSX = jsxTypes[answers.type.toLowerCase()]
 
-  const createFile = (content, filePath, fileName) => {
+  const createFile = (content, filePath, fileName, isStory) => {
+    let logFileName = fileName
+    if (isStory) {
+      logFileName = `stories/${fileName}`
+      const importOptions = {
+        after: {
+          regex: /import.+\n/g,
+          last: true
+        },
+        asNewLine: true
+      }
+      
+      const storyOptions = {
+        after: {
+          regex: /\n/g,
+          last: true
+        },
+        asNewLine: true
+      }
+      
+      try {
+        const data = fs.readFileSync(path.resolve(filePath, fileName), 'utf8')
+        const result = editer.insert(`import ${componentName} from './${componentName}'`, data, importOptions)
+        
+        const outputStory = `
+storiesOf('${componentName}', module)
+  .add('renders ${componentName}', () => (
+    <${componentName} />
+  ))
+`
+        content = editer.insert(outputStory, result, storyOptions)
+      } catch(err) {
+        if (err) {
+          console.log(err)
+          process.exit(4)
+        }
+      }
+    }
+    
     fs.outputFile(path.resolve(filePath, fileName), content, (err) => {
       if (err) {
-        console.error(chalk.red(`❌  Failed to write file: ${fileName}`))
+        console.error(chalk.red(`❌  Failed to write file: ${logFileName}`))
         console.error(chalk.red(`   ${err}`))
         process.exit(2)
       }
-      console.info(`✅  ${fileName}`)
+      console.info(`✅  ${logFileName}`)
     })
   }
 
@@ -126,4 +167,9 @@ export { ${componentName} as default }
   createFile(outputJSX, componentPath, componentJSX)
   createFile(outputCss, componentPath, componentCSS)
   createFile(outputIndex, componentPath, componentIndex)
+  if (answers.makeStory) {
+  const storyFilePath = path.resolve(paths.appSrc, '..', 'stories')
+    const storyIndex = 'index.js'
+    createFile(undefined, storyFilePath, storyIndex, true)
+  }
 })
