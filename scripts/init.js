@@ -121,6 +121,9 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     console.log(chalk.cyan('  ' + command + ' start'));
     console.log('    Starts the development server.');
     console.log();
+    console.log(chalk.cyan('  ' + command + ' create'));
+    console.log('    Creates a new react component boilerplate.');
+    console.log();
     console.log(chalk.cyan('  ' + command + ' run build'));
     console.log('    Bundles the app into static files for production.');
     console.log();
