@@ -96,7 +96,7 @@ export default ${componentName}
 `
   }
 
-  const globalCssPath = answers.makeStory ? '../../src/lib/globals/style/colors.css' : '../../lib/globals/style/colors.css'
+  const globalCssPath = answers.makeStory ? '../../src/lib/globals/style/globals.css' : '../../lib/globals/style/globals.css'
   const outputCss = `@import '${globalCssPath}';
 
 .${cssClass} {
@@ -168,7 +168,7 @@ storiesOf('${componentName}', module)
   createFile(outputCss, componentPath, componentCSS)
   createFile(outputIndex, componentPath, componentIndex)
   if (answers.makeStory) {
-  const storyFilePath = path.resolve(paths.appSrc, '..', 'stories')
+    const storyFilePath = path.resolve(paths.appSrc, '..', 'stories')
     const storyIndex = 'index.js'
     createFile(undefined, storyFilePath, storyIndex, true)
   }

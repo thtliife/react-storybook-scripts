@@ -6,24 +6,24 @@ function load(baseUser) {
     { id: 2, name: '2', ...baseUser },
     { id: 3, name: '3', ...baseUser },
     { id: 4, name: '4', ...baseUser }
-  ];
+  ]
 }
 
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.done = () => {};
+    this.done = () => {}
     this.props.setCallWhenDone && this.props.setCallWhenDone((done) => {
-      this.done = done;
-    });
+      this.done = done
+    })
 
-    this.state = { users: [] };
+    this.state = { users: [] }
   }
 
   async componentDidMount() {
-    const users = load({ age: 42 });
-    this.setState({ users }, () => this.done());
+    const users = load({ age: 42 })
+    this.setState({ users }, () => this.done())
   }
 
   render() {
@@ -33,6 +33,6 @@ export default class extends React.Component {
           <div key={user.id}>{user.name}: {user.age}</div>
         ))}
       </div>
-    );
+    )
   }
 }

@@ -6,7 +6,7 @@ export default class extends React.Component {
     { id: 2, name: '2' },
     { id: 3, name: '3' },
     { id: 4, name: '4' }
-  ];
+  ]
 
   render() {
     return (
@@ -15,6 +15,6 @@ export default class extends React.Component {
           <div key={user.id}>{user.name}</div>
         ))}
       </div>
-    );
+    )
   }
 }

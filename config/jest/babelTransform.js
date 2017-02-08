@@ -6,9 +6,9 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-const babelJest = require('babel-jest');
+const babelJest = require('babel-jest')
 
 module.exports = babelJest.createTransformer({
   presets: [require.resolve('babel-preset-react-app')],
   babelrc: false
-});
+})

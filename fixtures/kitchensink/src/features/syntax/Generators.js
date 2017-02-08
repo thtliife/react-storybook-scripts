@@ -1,31 +1,31 @@
 import React from 'react'
 
 function * load(limit) {
-  let i = 1;
+  let i = 1
   while (i <= limit) {
-    yield { id: i, name: i };
-    i++;
+    yield { id: i, name: i }
+    i++
   }
 }
 
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.done = () => {};
+    this.done = () => {}
     this.props.setCallWhenDone && this.props.setCallWhenDone((done) => {
-      this.done = done;
-    });
+      this.done = done
+    })
 
-    this.state = { users: [] };
+    this.state = { users: [] }
   }
 
   componentDidMount() {
-    const users = [];
+    const users = []
     for (let user of load(4)) {
-      users.push(user);
+      users.push(user)
     }
-    this.setState({ users }, () => this.done());
+    this.setState({ users }, () => this.done())
   }
 
   render() {
@@ -35,6 +35,6 @@ export default class extends React.Component {
           <div key={user.id}>{user.name}</div>
         ))}
       </div>
-    );
+    )
   }
 }

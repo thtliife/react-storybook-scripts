@@ -1,4 +1,4 @@
-@import '../../lib/globals/style/colors.css';
+@import '../../lib/globals/style/globals.css';
 
 .header-logo {
   animation: header-logo-spin infinite 20s linear;

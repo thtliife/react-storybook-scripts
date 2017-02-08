@@ -9,14 +9,14 @@
  */
 // @remove-on-eject-end
 
-var path = require('path');
-var fs = require('fs');
+var path = require('path')
+var fs = require('fs')
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
-var appDirectory = fs.realpathSync(process.cwd());
+var appDirectory = fs.realpathSync(process.cwd())
 function resolveApp(relativePath) {
-  return path.resolve(appDirectory, relativePath);
+  return path.resolve(appDirectory, relativePath)
 }
 
 // We support resolving modules according to `NODE_PATH`.
@@ -38,7 +38,7 @@ var nodePaths = (process.env.NODE_PATH || '')
   .split(process.platform === 'win32' ? ';' : ':')
   .filter(Boolean)
   .filter(folder => !path.isAbsolute(folder))
-  .map(resolveApp);
+  .map(resolveApp)
 
 // config after eject: we're in ./config/
 module.exports = {
@@ -48,16 +48,17 @@ module.exports = {
   appIndexJs: resolveApp('src/index.jsx'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
+  appCssGlobal: resolveApp('src/lib/globals/style/globals.css'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths
-};
+}
 
 // @remove-on-eject-begin
 function resolveOwn(relativePath) {
-  return path.resolve(__dirname, relativePath);
+  return path.resolve(__dirname, relativePath)
 }
 
 // config before eject: we're in ./node_modules/react-scripts/config/
@@ -68,13 +69,14 @@ module.exports = {
   appIndexJs: resolveApp('src/index.jsx'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
+  appCssGlobal: resolveApp('src/lib/globals/style/globals.css'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   // this is empty with npm3 but node resolution searches higher anyway:
   ownNodeModules: resolveOwn('../node_modules'),
   nodePaths: nodePaths
-};
+}
 
 // config before publish: we're in ./packages/react-scripts/config/
 if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) {
@@ -85,11 +87,12 @@ if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) 
     appIndexJs: resolveOwn('../template/src/index.jsx'),
     appPackageJson: resolveOwn('../package.json'),
     appSrc: resolveOwn('../template/src'),
+    appCssGlobal: resolveOwn('../template/src/lib/globals/style/globals.css'),
     yarnLockFile: resolveOwn('../template/yarn.lock'),
     testsSetup: resolveOwn('../template/src/setupTests.js'),
     appNodeModules: resolveOwn('../node_modules'),
     ownNodeModules: resolveOwn('../node_modules'),
     nodePaths: nodePaths
-  };
+  }
 }
 // @remove-on-eject-end

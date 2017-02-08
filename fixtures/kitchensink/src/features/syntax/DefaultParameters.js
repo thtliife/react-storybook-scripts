@@ -6,24 +6,24 @@ function load(id = 0) {
     { id: id + 2, name: '2' },
     { id: id + 3, name: '3' },
     { id: id + 4, name: '4' }
-  ];
+  ]
 }
 
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.done = () => {};
+    this.done = () => {}
     this.props.setCallWhenDone && this.props.setCallWhenDone((done) => {
-      this.done = done;
-    });
+      this.done = done
+    })
 
-    this.state = { users: [] };
+    this.state = { users: [] }
   }
 
   async componentDidMount() {
-    const users = load();
-    this.setState({ users }, () => this.done());
+    const users = load()
+    this.setState({ users }, () => this.done())
   }
 
   render() {
@@ -33,6 +33,6 @@ export default class extends React.Component {
           <div key={user.id}>{user.name}</div>
         ))}
       </div>
-    );
+    )
   }
 }
