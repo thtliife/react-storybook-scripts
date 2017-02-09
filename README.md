@@ -45,7 +45,7 @@ eg:
 
 ```
 
-All css files created with the component script include a global stylesheet located at `src/lib/globals/style/globals.css` where variables may be defined.
+All css files created with the component script include a stylesheet located at `src/lib/variables.css` where variables may be defined.
 
 ## Installation
 ```bash
