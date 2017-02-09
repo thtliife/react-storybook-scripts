@@ -13,6 +13,7 @@ module.exports = (baseConfig, environment) => {
       ]
     }),
     require('postcss-import'),
+    require('postcss-nested'),
     require('postcss-nested-vars')
   ]
   
