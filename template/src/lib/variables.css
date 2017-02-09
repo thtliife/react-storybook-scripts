@@ -1,0 +1,19 @@
+$fontFamily: "Titillium Web", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+$reactBanner: #000;
+$reactBannerText: #fff;
+
+$darkPrimary: #455a64;
+$primary: #607d8b;
+$lightPrimary: #cfd8dc;
+$textLightPrimary: #fff;
+$accent: #ff5722;
+$textPrimary: #212121;
+$textSecondary: #757575;
+$divider: #bdbdbd;
+
+$buttonPrimary: $primary;
+$buttonPrimaryText: $textLightPrimary;
+$buttonPrimaryHover: $lightPrimary;
+$buttonPrimaryActive: $darkPrimary;
+
+$buttonAccent: $accent;

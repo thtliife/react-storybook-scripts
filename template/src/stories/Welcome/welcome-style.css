@@ -1,5 +1,4 @@
-@import '../../lib/globals/style/globals.css';
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+@import '../../lib/variables.css';
 
 ul {
   list-style-type: none;

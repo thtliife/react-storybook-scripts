@@ -17,7 +17,5 @@ $fontFamily: 'Harmattan', sans-serif;
 @import 'lib/variables.css';
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: $fontFamily;
 }

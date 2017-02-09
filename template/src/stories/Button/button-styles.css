@@ -1,4 +1,4 @@
-@import '../../lib/globals/style/globals.css';
+@import '../../lib/variables.css';
 
 .button {
   border: 1px solid $primary;
@@ -8,4 +8,14 @@
   font-size: 15;
   padding: 3px 10px;
   margin: 10px;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    border: 1px solid $lightPrimary;
+    background-color: $primary;
+  }
 }
