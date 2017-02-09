@@ -17,5 +17,6 @@
   &:hover {
     border: 1px solid $lightPrimary;
     background-color: $primary;
+    color: $textLightPrimary;
   }
 }
