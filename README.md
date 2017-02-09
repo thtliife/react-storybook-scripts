@@ -12,7 +12,7 @@ Start the storybook dev server via
 npm run storybook
 ```
 
-Also included is a script to ease the createion of new components, which can be invoked via
+Also included is a script to ease the creation of new components, which can be invoked via
 ```bash
 npm run component
 ```
