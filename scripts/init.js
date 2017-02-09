@@ -28,7 +28,9 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     'component': 'react-scripts component',
     'build': 'react-scripts build',
     'test': 'react-scripts test --env=jsdom',
-    'eject': 'react-scripts eject'
+    'eject': 'react-scripts eject',
+    'storybook': 'start-storybook -p 6006',
+    'build-storybook': 'build-storybook'
   }
 
   fs.writeFileSync(
@@ -133,6 +135,18 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     console.log(chalk.cyan('  ' + command + ' run eject'))
     console.log('    Removes this tool and copies build dependencies, configuration files')
     console.log('    and scripts into the app directory. If you do this, you can’t go back!')
+    console.log()
+    console.log(chalk.cyan('  ' + command + ' run storybook'))
+    console.log('    Starts the storybook server for easy mocking, testing and development')
+    console.log('    of components.')
+    console.log()
+    console.log(chalk.cyan('  ' + command + ' run build-storybook'))
+    console.log('    build the storybook configured in the Storybook directory into a')
+    console.log('    static webpack and saves it at' + appPath + '/storybook-static.')
+    console.log('    To test it locally, simply run the following commands:')
+    console.log()
+    console.log(chalk.cyan('  cd'), cdpath + '/storybook-static')
+    console.log('  ' + chalk.cyan('python -m SimpleHTTPServer'))
     console.log()
     console.log('We suggest that you begin by typing:')
     console.log()

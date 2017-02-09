@@ -58,6 +58,7 @@ prompt(
     path.join('config', 'jest', 'cssTransform.js'),
     path.join('config', 'jest', 'fileTransform.js'),
     path.join('scripts', 'build.js'),
+    path.join('scripts', 'component.js'),
     path.join('scripts', 'start.js'),
     path.join('scripts', 'test.js')
   ]

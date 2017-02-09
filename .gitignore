@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/node,osx
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 ### Node ###
 # Logs
@@ -85,4 +85,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.gitignore.io/api/node,osx
+### create-react-app ###
+# Production build
+/build
