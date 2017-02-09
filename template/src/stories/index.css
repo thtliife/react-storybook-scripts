@@ -14,7 +14,7 @@ $fontFamily: 'Harmattan', sans-serif;
 */
 
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
-@import 'lib/variables.css';
+@import '../lib/variables.css';
 
 body {
   font-family: $fontFamily;
