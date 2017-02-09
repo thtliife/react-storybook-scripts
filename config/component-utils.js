@@ -83,7 +83,7 @@ const readMe = (props) => `# ${props.name}
 A short description of the ${props.name} component.
 `
 
-const importStatement = (props) => `import { ${props.name} } from './${props.name}'
+const importStatement = (props) => `import './${props.name}'
 `
 
 const questions = [
