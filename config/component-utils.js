@@ -128,8 +128,8 @@ const questions = [
   }
 ]
 
-const createFile = (content, filePath, fileName, isStory) => {
-  let logFileName = isStory ? `stories/${fileName}` : `modules/${fileName}`
+const createFile = (content, filePath, fileName, componentName, isStory) => {
+  let logFileName = isStory ? `stories/${componentName}/${fileName}` : `modules/${componentName}/${fileName}`
   
   fs.outputFile(path.resolve(filePath, fileName), content, (err) => {
     if (err) {

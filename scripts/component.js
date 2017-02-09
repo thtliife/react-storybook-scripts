@@ -44,7 +44,7 @@ inquirer.prompt(componentUtils.questions).then((answers) => {
   let fileCount = outputFiles.length;
   for (let i = 0; i < fileCount; i++) {
     const thisFile = outputFiles[i]
-    if (!thisFile.skip) componentUtils.createFile(thisFile.content, componentPath, thisFile.name)
+    if (!thisFile.skip) componentUtils.createFile(thisFile.content, componentPath, thisFile.name, componentName, answers.compOrStory === 'Storybook')
   }
   
   const makeStory = answers.compOrStory === 'Storybook'
