@@ -1,3 +1,4 @@
+@import '../../lib/globals/style/globals.css';
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 
 ul {
@@ -14,7 +15,7 @@ li {
   margin: 1.5rem;
   max-width: 70%;
   line-height: 1.4;
-  font-family: "Titillium Web", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-family: $fontFamily;
 }
 
 .logo {
@@ -22,30 +23,11 @@ li {
 }
 
 .link {
-  color: #1474f3;
+  color: $darkPrimary;
   text-decoration: none;
   padding-bottom: 2;
 }
 
 .link:hover {
-  color: #5d9ff7;
-}
-
-.code {
-  font-size: 1em;
-  font-weight: 600;
-  padding: '2px 5px';
-  border: '1px solid #eae9e9';
-  border-radius: 4;
-  background-color: '#f3f2f2';
-  color: '#3a3a3a';
-}
-
-.welcome-doc-links {
-  margin-top: 1rem;
-  background-color: #eee;
-  border: 1px solid #aaa;
-  border-radius: 0.3rem;
-  min-width: 100%;
-  box-shadow: 0 0 30px 0 rgba(50, 50, 50, 0.25);
+  color: $primary;
 }

@@ -1,3 +1,21 @@
+/*
+Different sans fonts to play with...
+@import url('https://fonts.googleapis.com/css?family=Arsenal');
+@import url('https://fonts.googleapis.com/css?family=Catamaran');
+@import url('https://fonts.googleapis.com/css?family=Harmattan');
+@import url('https://fonts.googleapis.com/css?family=NTR');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+$fontFamily: 'Arsenal', sans-serif;
+$fontFamily: 'Titillium Web', sans-serif;
+$fontFamily: 'Catamaran', sans-serif;
+$fontFamily: 'NTR', sans-serif;
+$fontFamily: 'Harmattan', sans-serif;
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+$fontFamily: "Titillium Web", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
 $reactBanner: #000;
 $reactBannerText: #fff;
 

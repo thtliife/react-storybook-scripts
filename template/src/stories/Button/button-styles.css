@@ -1,7 +1,9 @@
+@import '../../lib/globals/style/globals.css';
+
 .button {
-  border: 1px solid #eee;
+  border: 1px solid $primary;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: $lightPrimary;
   cursor: pointer;
   font-size: 15;
   padding: 3px 10px;

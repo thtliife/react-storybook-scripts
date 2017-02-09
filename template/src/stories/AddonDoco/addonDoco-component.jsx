@@ -6,7 +6,7 @@ const AddonDoco = (props) => (
   <div className="addon-doco">
     <h1>STORYBOOK Addon Doco</h1>
     Here are some links for all the documentation required to take advantage of this storybook implementation and its addons...
-    <div className="welcome-doc-links">
+    <div className="addon-doco-links">
       <ul>
         <li><h3><a className="link" href="https://getstorybook.io/docs/react-storybook">Main StoryBook Documentation</a></h3></li>
         <li><strong>Default installed addons</strong>

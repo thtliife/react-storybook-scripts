@@ -23,4 +23,9 @@ Additionally, I have added support for css variables via postcss.
 
 All css files created with the component script include a global stylesheet located at `src/lib/globals/style/globals.css` where variables may be defined.
 
+## Installation
+```bash
+create-react-app my-awesome-app --scripts-version react-storybook-scripts
+```
+
 Enjoy.
