@@ -7,11 +7,13 @@ Please refer to its documentation:
 * [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
 
 It will also setup and configure [react-storybook](https://getstorybook.io) for easy component testing.
-Start the storybook dev server via ```bash
+Start the storybook dev server via
+```bash
 npm run storybook
 ```
 
-Also included is a script to ease the createion of new components, which can be invoked via ```bash
+Also included is a script to ease the createion of new components, which can be invoked via
+```bash
 npm run component
 ```
 
