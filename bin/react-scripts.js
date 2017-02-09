@@ -5,7 +5,7 @@ var args = process.argv.slice(3);
 
 switch (script) {
 case 'build':
-case 'create':
+case 'component':
 case 'eject':
 case 'start':
 case 'test':

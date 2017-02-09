@@ -15,6 +15,16 @@ module.exports = (baseConfig, environment) => {
     require('postcss-import'),
     require('postcss-nested-vars')
   ]
+  
+  config.module.loaders.push(
+    {
+      test: /\.md$/,
+      loader: 'raw'
+    }, {
+      test: /\.json$/,
+      loader: 'json'
+    }
+  )
 
   return config
 }

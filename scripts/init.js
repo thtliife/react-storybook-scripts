@@ -25,7 +25,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
   // Setup the script rules
   appPackage.scripts = {
     'start': 'react-scripts start',
-    'create': 'react-scripts create',
+    'component': 'react-scripts component',
     'build': 'react-scripts build',
     'test': 'react-scripts test --env=jsdom',
     'eject': 'react-scripts eject'
@@ -121,7 +121,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     console.log(chalk.cyan('  ' + command + ' start'))
     console.log('    Starts the development server.')
     console.log()
-    console.log(chalk.cyan('  ' + command + ' create'))
+    console.log(chalk.cyan('  ' + command + ' component'))
     console.log('    Creates a new react component boilerplate.')
     console.log()
     console.log(chalk.cyan('  ' + command + ' run build'))
