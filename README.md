@@ -19,7 +19,31 @@ npm run component
 
 _the 'npm' command may be replace with 'yarnpkg' if you prefer to use yarn as your package manager_
 
-Additionally, I have added support for css variables via postcss.
+Additionally, I have added support for css variables and css rule nesting via postcss.
+eg: 
+```css
+.button {
+  border: 1px solid $primary;
+  border-radius: 3px;
+  background-color: $lightPrimary;
+  cursor: pointer;
+  font-size: 15;
+  padding: 3px 10px;
+  margin: 10px;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    border: 1px solid $lightPrimary;
+    background-color: $primary;
+    color: $textLightPrimary;
+  }
+}
+
+```
 
 All css files created with the component script include a global stylesheet located at `src/lib/globals/style/globals.css` where variables may be defined.
 
