@@ -11,37 +11,7 @@ var fs = require('fs-extra')
 var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
-const _ = require('lodash')
-const cp = require('child_process')
-
-const yarnBinFix = (appPath) => {
-
-  const nodeModules = path.join(appPath, 'node_modules')
-  const bin = path.join(nodeModules, '.bin')
-
-  cp.execSync(`mkdir ${bin} || true`)
-
-  const result = _.split(String(cp.execSync(`find ${nodeModules} -type f -name 'package.json'`)), '\n')
-  _.forEach(result, (f) => {
-    if (!fs.existsSync(f)) {
-      return
-    }
-
-    const pgk = JSON.parse(fs.readFileSync(f))
-
-    _.forEach(pgk.bin, (pth, name) => {
-      if (!_.isString(name)) {
-        return
-      }
-
-      const src = path.join(bin, name)
-      const dst = path.resolve(path.dirname(f), pth)
-      if (!fs.existsSync(src)) {
-        cp.execSync(`ln -s ${dst} ${src} || true`, {stdio: [0, 1, 'ignore']})
-      }
-    })
-  })
-}
+var yarnBinFix = require('../config/yarn-bin-fix')
 
 module.exports = function(appPath, appName, verbose, originalDirectory, template) {
   var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
@@ -141,7 +111,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
       console.log(chalk.cyan('Fixing yarns shortcomings... :P'))
       console.log(chalk.yellow('  Relinking binaries'))
       console.log()
-      yarnBinFix(appPath)
+      yarnBinFix.relinkBins(appPath)
     }
     
     // Display the most elegant way to cd.
