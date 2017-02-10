@@ -90,7 +90,7 @@ if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) 
     appPackageJson: resolveOwn('../package.json'),
     appSrc: resolveOwn('../template/src'),
     appCssGlobal: resolveOwn('../template/src/lib/variables.css'),
-    storybook: resolveApp('../template/src/stories'),
+    storybook: resolveOwn('../template/src/stories'),
     yarnLockFile: resolveOwn('../template/yarn.lock'),
     testsSetup: resolveOwn('../template/src/setupTests.js'),
     appNodeModules: resolveOwn('../node_modules'),

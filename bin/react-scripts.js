@@ -2,6 +2,7 @@
 const spawn = require('cross-spawn');
 const script = process.argv[2];
 const args = process.argv.slice(3);
+const paths = require('../config/paths.js')
 
 const launch = (script) => {
   const result = spawn.sync(
@@ -21,10 +22,10 @@ case 'test':
   launch('../scripts/' + script)
   break;
 case 'storybook':
-  launch('../node_modules/@kadira/storybook/dist/server/index.js')
+  launch(`${paths.appNodeModules}/@kadira/storybook/dist/server/index.js`)
   break;
 case 'build-storybook':
-  launch('../node_modules/@kadira/storybook/dist/build.js')
+  launch(`${paths.appNodeModules}/@kadira/storybook/dist/build.js`)
   break;
 default:
   console.log('Unknown script "' + script + '".');
