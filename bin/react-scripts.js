@@ -1,7 +1,16 @@
 #!/usr/bin/env node
-var spawn = require('cross-spawn');
-var script = process.argv[2];
-var args = process.argv.slice(3);
+const spawn = require('cross-spawn');
+const script = process.argv[2];
+const args = process.argv.slice(3);
+
+const launch = (script) => {
+  const result = spawn.sync(
+    'node',
+    [require.resolve(script)].concat(args),
+    {stdio: 'inherit'}
+  );
+  process.exit(result.status);
+}
 
 switch (script) {
 case 'build':
@@ -9,12 +18,13 @@ case 'component':
 case 'eject':
 case 'start':
 case 'test':
-  var result = spawn.sync(
-    'node',
-    [require.resolve('../scripts/' + script)].concat(args),
-    {stdio: 'inherit'}
-  );
-  process.exit(result.status);
+  launch('../scripts/' + script)
+  break;
+case 'storybook':
+  launch('../node_modules/@kadira/storybook/dist/server/index.js')
+  break;
+case 'build-storybook':
+  launch('../node_modules/@kadira/storybook/dist/build.js')
   break;
 default:
   console.log('Unknown script "' + script + '".');

@@ -11,7 +11,6 @@ var fs = require('fs-extra')
 var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
-var yarnBinFix = require('../config/yarn-bin-fix')
 
 console.clear = () => { process.stdout.write('\u001B[2J\u001B[0;0f') }
 
@@ -32,8 +31,8 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     'build': 'react-scripts build',
     'test': 'react-scripts test --env=jsdom',
     'eject': 'react-scripts eject',
-    'storybook': 'start-storybook -p 6006',
-    'build-storybook': 'build-storybook'
+    'storybook': 'react-scripts storybook -p 6006',
+    'build-storybook': 'react-scripts build-storybook'
   }
 
   fs.writeFileSync(
@@ -108,14 +107,6 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
       return
     }
 
-    // Relink binaries if yarn was used, coz it STILL doesnt work right...
-    if (useYarn) {
-      console.log(chalk.cyan('Fixing yarns shortcomings... :P'))
-      console.log(chalk.yellow('  Relinking binaries'))
-      console.log()
-      yarnBinFix.relinkBins(appPath)
-    }
-    
     // Display the most elegant way to cd.
     // This needs to handle an undefined originalDirectory for
     // backward compatibility with old global-cli's.
