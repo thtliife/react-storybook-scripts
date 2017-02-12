@@ -187,7 +187,10 @@ module.exports = {
                       'Firefox ESR',
                       'not ie < 9', // React doesn't support IE8 anyway
                     ]
-                  })
+                  }),
+                  require('postcss-import'),
+                  require('postcss-nested'),
+                  require('postcss-nested-vars')
                 ]
               }
             }
