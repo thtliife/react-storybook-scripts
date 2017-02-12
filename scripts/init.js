@@ -12,8 +12,6 @@ var path = require('path')
 var spawn = require('cross-spawn')
 var chalk = require('chalk')
 
-console.clear = () => { process.stdout.write('\u001B[2J\u001B[0;0f') }
-
 module.exports = function(appPath, appName, verbose, originalDirectory, template) {
   var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
   var ownPath = path.join(appPath, 'node_modules', ownPackageName)
@@ -118,7 +116,6 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
       cdpath = appPath
     }
 
-    console.clear()
     console.log()
     console.log('Success! Created ' + appName + ' at ' + appPath)
     console.log('Inside that directory, you can run several commands:')
