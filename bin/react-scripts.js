@@ -9,7 +9,7 @@ case 'component':
 case 'eject':
 case 'start':
 case 'storybook':
-case 'storybook:build':
+case 'buildStorybook':
 case 'test':
   var result = spawn.sync(
     'node',
