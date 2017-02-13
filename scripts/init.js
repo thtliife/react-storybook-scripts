@@ -30,7 +30,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     'test': 'react-scripts test --env=jsdom',
     'eject': 'react-scripts eject',
     'storybook': 'react-scripts storybook -p 6006',
-    'build-storybook': 'react-scripts build-storybook'
+    'storybook:build': 'react-scripts buildStorybook'
   };
 
   fs.writeFileSync(
@@ -140,7 +140,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     console.log('    Starts the storybook server for easy mocking, testing and development');
     console.log('    of components.');
     console.log();
-    console.log(chalk.cyan('  ' + command + ' run build-storybook'));
+    console.log(chalk.cyan('  ' + command + ' run storybook:build'));
     console.log('    build the storybook configured in the Storybook directory into a');
     console.log('    static webpack and saves it at:');
     console.log('    ' + appPath + '/storybook-static.');
