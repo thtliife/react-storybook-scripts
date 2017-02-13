@@ -6,7 +6,7 @@ function load() {
     [2, '2'],
     [3, '3'],
     [4, '4']
-  ]
+  ];
 }
 
 export default class extends Component {
@@ -15,27 +15,27 @@ export default class extends Component {
   }
 
   constructor(props) {
-    super(props)
-    this.state = { users: [] }
+    super(props);
+    this.state = { users: [] };
   }
 
   async componentDidMount() {
-    const users = load()
-    this.setState({ users })
+    const users = load();
+    this.setState({ users });
   }
 
   componentDidUpdate() {
-    this.props.onReady()
+    this.props.onReady();
   }
 
   render() {
     return (
       <div id="feature-array-destructuring">
         {this.state.users.map(user => {
-          const [id, name] = user
+          const [id, name] = user;
           return <div key={id}>{name}</div>
         })}
       </div>
-    )
+    );
   }
 }

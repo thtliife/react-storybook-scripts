@@ -18,7 +18,7 @@ describe('Integration', () => {
     it('PUBLIC_URL', async () => {
       const doc = await initDOM('public-url')
 
-      const prefix = process.env.NODE_ENV === 'development' ? '' : 'http://www.example.org/spa'
+      const prefix = process.env.NODE_ENV === 'development' ? '' : 'http://www.example.org/spa';
       expect(doc.getElementById('feature-public-url').textContent).to.equal(`${prefix}.`)
       expect(doc.querySelector('head link[rel="shortcut icon"]').getAttribute('href'))
         .to.equal(`${prefix}/favicon.ico`)

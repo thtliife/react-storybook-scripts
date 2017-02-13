@@ -10,7 +10,7 @@ export default class extends Component {
     { id: 2, name: '2' },
     { id: 3, name: '3' },
     { id: 4, name: '4' }
-  ]
+  ];
 
   componentDidMount() {
     this.props.onReady()
@@ -23,6 +23,6 @@ export default class extends Component {
           <div key={user.id}>{user.name}</div>
         ))}
       </div>
-    )
+    );
   }
 }

@@ -7,17 +7,17 @@ export default class extends Component {
   }
 
   constructor(props) {
-    super(props)
-    this.state = { users: [] }
+    super(props);
+    this.state = { users: [] };
   }
 
   async componentDidMount() {
-    const users = load()
-    this.setState({ users })
+    const users = load();
+    this.setState({ users });
   }
 
   componentDidUpdate() {
-    this.props.onReady()
+    this.props.onReady();
   }
 
   render() {
@@ -27,6 +27,6 @@ export default class extends Component {
           <div key={user.id}>{user.name}</div>
         ))}
       </div>
-    )
+    );
   }
 }

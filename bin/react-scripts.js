@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const spawn = require('cross-spawn')
-const script = process.argv[2]
-const args = process.argv.slice(3)
+var spawn = require('cross-spawn');
+var script = process.argv[2];
+var args = process.argv.slice(3);
 const paths = require('../config/paths.js')
 
 const launch = (script) => {
@@ -35,16 +35,17 @@ case 'component':
 case 'eject':
 case 'start':
 case 'test':
-  launch('../scripts/' + script)
-  break
+  launch('../scripts/' + script);
+  break;
 case 'storybook':
-  launch(`${paths.appNodeModules}/@kadira/storybook/dist/server/index.js`)
-  break
+  launch(`${paths.appNodeModules}/@kadira/storybook/dist/server/index.js`);
+  break;
 case 'build-storybook':
-  launch(`${paths.appNodeModules}/@kadira/storybook/dist/build.js`)
-  break
+  launch(`${paths.appNodeModules}/@kadira/storybook/dist/build.js`);
+  break;
 default:
-  console.log('Unknown script "' + script + '".')
-  console.log('Perhaps you need to update react-scripts?')
-  break
+  console.log('Unknown script "' + script + '".');
+  console.log('Perhaps you need to update react-scripts?');
+  console.log('See: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#updating-to-new-releases');
+  break;
 }

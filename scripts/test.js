@@ -9,32 +9,32 @@
  */
 // @remove-on-eject-end
 
-process.env.NODE_ENV = 'test'
-process.env.PUBLIC_URL = ''
+process.env.NODE_ENV = 'test';
+process.env.PUBLIC_URL = '';
 
 // Load environment variables from .env file. Suppress warnings using silent
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.
 // https://github.com/motdotla/dotenv
-require('dotenv').config({silent: true})
+require('dotenv').config({silent: true});
 
-const jest = require('jest')
-const argv = process.argv.slice(2)
+const jest = require('jest');
+const argv = process.argv.slice(2);
 
 // Watch unless on CI or in coverage mode
 if (!process.env.CI && argv.indexOf('--coverage') < 0) {
-  argv.push('--watch')
+  argv.push('--watch');
 }
 
 // @remove-on-eject-begin
 // This is not necessary after eject because we embed config into package.json.
-const createJestConfig = require('../utils/createJestConfig')
-const path = require('path')
-const paths = require('../config/paths')
+const createJestConfig = require('../utils/createJestConfig');
+const path = require('path');
+const paths = require('../config/paths');
 argv.push('--config', JSON.stringify(createJestConfig(
   relativePath => path.resolve(__dirname, '..', relativePath),
   path.resolve(paths.appSrc, '..'),
   false
-)))
+)));
 // @remove-on-eject-end
-jest.run(argv)
+jest.run(argv);

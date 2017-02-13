@@ -7,20 +7,20 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-var fs = require('fs-extra')
-var path = require('path')
-var spawn = require('cross-spawn')
-var chalk = require('chalk')
+var fs = require('fs-extra');
+var path = require('path');
+var spawn = require('cross-spawn');
+var chalk = require('chalk');
 
 module.exports = function(appPath, appName, verbose, originalDirectory, template) {
-  var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name
-  var ownPath = path.join(appPath, 'node_modules', ownPackageName)
-  var appPackage = require(path.join(appPath, 'package.json'))
-  var useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'))
+  var ownPackageName = require(path.join(__dirname, '..', 'package.json')).name;
+  var ownPath = path.join(appPath, 'node_modules', ownPackageName);
+  var appPackage = require(path.join(appPath, 'package.json'));
+  var useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
   // Copy over some of the devDependencies
-  appPackage.dependencies = appPackage.dependencies || {}
-  appPackage.devDependencies = appPackage.devDependencies || {}
+  appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.devDependencies = appPackage.devDependencies || {};
 
   // Setup the script rules
   appPackage.scripts = {
@@ -31,25 +31,25 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     'eject': 'react-scripts eject',
     'storybook': 'react-scripts storybook -p 6006',
     'build-storybook': 'react-scripts build-storybook'
-  }
+  };
 
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2)
-  )
+  );
 
-  var readmeExists = fs.existsSync(path.join(appPath, 'README.md'))
+  var readmeExists = fs.existsSync(path.join(appPath, 'README.md'));
   if (readmeExists) {
-    fs.renameSync(path.join(appPath, 'README.md'), path.join(appPath, 'README.old.md'))
+    fs.renameSync(path.join(appPath, 'README.md'), path.join(appPath, 'README.old.md'));
   }
 
   // Copy the files for the user
-  var templatePath = template ? path.resolve(originalDirectory, template) : path.join(ownPath, 'template')
+  var templatePath = template ? path.resolve(originalDirectory, template) : path.join(ownPath, 'template');
   if (fs.existsSync(templatePath)) {
-    fs.copySync(templatePath, appPath)
+    fs.copySync(templatePath, appPath);
   } else {
-    console.error('Could not locate supplied template: ' + chalk.green(templatePath))
-    return
+    console.error('Could not locate supplied template: ' + chalk.green(templatePath));
+    return;
   }
 
   // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
@@ -58,106 +58,106 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
     if (err) {
       // Append if there's already a `.gitignore` file there
       if (err.code === 'EEXIST') {
-        var data = fs.readFileSync(path.join(appPath, 'gitignore'))
-        fs.appendFileSync(path.join(appPath, '.gitignore'), data)
-        fs.unlinkSync(path.join(appPath, 'gitignore'))
+        var data = fs.readFileSync(path.join(appPath, 'gitignore'));
+        fs.appendFileSync(path.join(appPath, '.gitignore'), data);
+        fs.unlinkSync(path.join(appPath, 'gitignore'));
       } else {
-        throw err
+        throw err;
       }
     }
-  })
+  });
 
   // Run yarn or npm for react and react-dom
   // TODO: having to do two npm/yarn installs is bad, can we avoid it?
-  var command
-  var args
+  var command;
+  var args;
 
   if (useYarn) {
-    command = 'yarnpkg'
-    args = ['add']
+    command = 'yarnpkg';
+    args = ['add'];
   } else {
-    command = 'npm'
+    command = 'npm';
     args = [
       'install',
       '--save',
       verbose && '--verbose'
-    ].filter(function(e) { return e })
+    ].filter(function(e) { return e; });
   }
-  args.push('react', 'react-dom')
+  args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
-  var templateDependenciesPath = path.join(appPath, '.template.dependencies.json')
+  var templateDependenciesPath = path.join(appPath, '.template.dependencies.json');
   if (fs.existsSync(templateDependenciesPath)) {
-    var templateDependencies = require(templateDependenciesPath).dependencies
+    var templateDependencies = require(templateDependenciesPath).dependencies;
     args = args.concat(Object.keys(templateDependencies).map(function (key) {
-      return key + '@' + templateDependencies[key]
-    }))
-    fs.unlinkSync(templateDependenciesPath)
+      return key + '@' + templateDependencies[key];
+    }));
+    fs.unlinkSync(templateDependenciesPath);
   }
 
-  console.log('Installing react and react-dom using ' + command + '...')
-  console.log()
+  console.log('Installing react and react-dom using ' + command + '...');
+  console.log();
 
-  var proc = spawn(command, args, {stdio: 'inherit'})
+  var proc = spawn(command, args, {stdio: 'inherit'});
   proc.on('close', function (code) {
     if (code !== 0) {
-      console.error('`' + command + ' ' + args.join(' ') + '` failed')
-      return
+      console.error('`' + command + ' ' + args.join(' ') + '` failed');
+      return;
     }
 
     // Display the most elegant way to cd.
     // This needs to handle an undefined originalDirectory for
     // backward compatibility with old global-cli's.
-    var cdpath
+    var cdpath;
     if (originalDirectory &&
         path.join(originalDirectory, appName) === appPath) {
-      cdpath = appName
+      cdpath = appName;
     } else {
-      cdpath = appPath
+      cdpath = appPath;
     }
 
-    console.log()
-    console.log('Success! Created ' + appName + ' at ' + appPath)
-    console.log('Inside that directory, you can run several commands:')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' start'))
-    console.log('    Starts the development server.')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' component'))
-    console.log('    Creates a new react component boilerplate.')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' run build'))
-    console.log('    Bundles the app into static files for production.')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' test'))
-    console.log('    Starts the test runner.')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' run eject'))
-    console.log('    Removes this tool and copies build dependencies, configuration files')
-    console.log('    and scripts into the app directory. If you do this, you can’t go back!')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' run storybook'))
-    console.log('    Starts the storybook server for easy mocking, testing and development')
-    console.log('    of components.')
-    console.log()
-    console.log(chalk.cyan('  ' + command + ' run build-storybook'))
-    console.log('    build the storybook configured in the Storybook directory into a')
-    console.log('    static webpack and saves it at:')
-    console.log('    ' + appPath + '/storybook-static.')
-    console.log('    To test it locally, simply run the following commands:')
-    console.log()
-    console.log(chalk.cyan('  cd'), cdpath + '/storybook-static')
-    console.log('  ' + chalk.cyan('python -m SimpleHTTPServer'))
-    console.log()
-    console.log('We suggest that you begin by typing:')
-    console.log()
-    console.log(chalk.cyan('  cd'), cdpath)
-    console.log('  ' + chalk.cyan(command + ' start'))
+    console.log();
+    console.log('Success! Created ' + appName + ' at ' + appPath);
+    console.log('Inside that directory, you can run several commands:');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' start'));
+    console.log('    Starts the development server.');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' component'));
+    console.log('    Creates a new react component boilerplate.');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' run build'));
+    console.log('    Bundles the app into static files for production.');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' test'));
+    console.log('    Starts the test runner.');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' run eject'));
+    console.log('    Removes this tool and copies build dependencies, configuration files');
+    console.log('    and scripts into the app directory. If you do this, you can’t go back!');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' run storybook'));
+    console.log('    Starts the storybook server for easy mocking, testing and development');
+    console.log('    of components.');
+    console.log();
+    console.log(chalk.cyan('  ' + command + ' run build-storybook'));
+    console.log('    build the storybook configured in the Storybook directory into a');
+    console.log('    static webpack and saves it at:');
+    console.log('    ' + appPath + '/storybook-static.');
+    console.log('    To test it locally, simply run the following commands:');
+    console.log();
+    console.log(chalk.cyan('  cd'), cdpath + '/storybook-static');
+    console.log('  ' + chalk.cyan('python -m SimpleHTTPServer'));
+    console.log();
+    console.log('We suggest that you begin by typing:');
+    console.log();
+    console.log(chalk.cyan('  cd'), cdpath);
+    console.log('  ' + chalk.cyan(command + ' start'));
     if (readmeExists) {
-      console.log()
-      console.log(chalk.yellow('You had a `README.md` file, we renamed it to `README.old.md`'))
+      console.log();
+      console.log(chalk.yellow('You had a `README.md` file, we renamed it to `README.old.md`'));
     }
-    console.log()
-    console.log('Happy hacking!')
-  })
-}
+    console.log();
+    console.log('Happy hacking!');
+  });
+};
